@@ -7,9 +7,8 @@ void dessine_snake(boule* serpent,int taille){
     gluPerspective(70,(double)740/480,1,1000);
    	 	gluLookAt(snake[0].x,snake[0].y-4,snake[0].z+3,snake[0].direction.x+snake[0].x,snake[0].direction.y+snake[0].y,snake[0].direction.z+snake[0].z,0,0,1);
     glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
-    glColor3ub(255,255,255);
+    glColor3ub(255,255-(6*snake[0].compteur_colli),255-(6*snake[0].compteur_colli));
     if(i==0){
-      glColor3ub(255,255,255);
       gluSphere(boule,.5,30,30);
       
     }else
