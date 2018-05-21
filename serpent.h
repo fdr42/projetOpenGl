@@ -31,7 +31,10 @@ int block_x;
 }boule;
 
 boule snake[TAILLE_MAX+1];
-
+float incr;
+int score;
+float prochaine_pente;
+float pente_actuelle;
 float vitesse;
 int tourne;
 int taille;
