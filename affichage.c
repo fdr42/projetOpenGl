@@ -22,7 +22,6 @@ void drawBitmapText(char *string,float x,float y,float z) {
 }
 
 void Affichage(){
-  int i;
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
   glLoadIdentity();
   gluPerspective(70,(double)640/480,1,1000);

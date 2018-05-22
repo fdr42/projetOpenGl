@@ -146,28 +146,21 @@ void init_plateau(){
 }
 
 
-
 void dessinPlannete(int posx, int posy){
   GLUquadric* boule =gluNewQuadric();
-  int transx;
   int i;
   glPushMatrix();
   glTranslatef(20,20,20);
-  for(i = 0; i < 100; i++){
-    if(i%2){
-      transx = -30;
-    }
-    else{
-      transx = 30;
-    }
-    glTranslatef(transx,15,0);
+  for(i = 0; i <100; i++){
+    glTranslatef(20,5*i,-5);
+    glRotatef(30,20,1,100);
+    
      glColor3ub(130,130,130);
     gluSphere(boule,5,30,30);
      glColor3ub(150,150,150);
-    glutSolidTorus(1, 10, 5, 30);
+     glutSolidTorus(1, 10, 8, 30);
   }
   glPopMatrix();
   
   
 }
-
