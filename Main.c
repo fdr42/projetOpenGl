@@ -17,9 +17,9 @@ void tourner(int boule){
   if(boule==1){
     if(snake[boule-1].atourner<snake[boule-1].nb_tour){
       if(snake[boule-1].tab_tour[snake[boule-1].atourner].pos_x>0)
-	snake[boule].direction.x+=0.05;
+	snake[boule].direction.x+=vitesse*2;
       else
-	snake[boule].direction.x-=0.05;
+	snake[boule].direction.x-=vitesse*2;
       snake[boule-1].tab_tour[snake[boule-1].atourner].compteur=0;
       snake[boule-1].atourner++;
     }
@@ -27,9 +27,9 @@ void tourner(int boule){
   }else if(snake[boule-1].atourner<=snake[boule-1].nb_tour ){
     if(snake[boule-1].atourner!=0){
       if(snake[boule-1].tab_tour[snake[boule-1].atourner].pos_x>0)
-	snake[boule].direction.x+=0.05;
+	snake[boule].direction.x+=vitesse*2;
       else
-	snake[boule].direction.x-=0.05;
+	snake[boule].direction.x-=vitesse*2;
       snake[boule-1].tab_tour[snake[boule-1].atourner].compteur=0;
     }
     snake[boule-1].atourner++;
@@ -52,7 +52,9 @@ void Animer(){
     for(int k=0;k<TAILLE_MAX-taille_tir;k++)
       snake[k].direction.y=0;
     //on compte jusqua 40 avant de decrementer une boule 
+if(taille!=1){
     if(++snake[0].compteur_colli>=40){
+
       blocs[snake[0].block_x][snake[0].block_y-1].obstacle--;
       taille--;
       score+=10;
@@ -61,6 +63,7 @@ void Animer(){
 	score+=100;
       //Si l'obstacle est totalement détruit le joueur gagne 100 pts
       snake[0].compteur_colli=0;
+}
     }
 
   }else{
@@ -98,7 +101,7 @@ void Animer(){
   float delta_x;
   for(int i=0;i<TAILLE_MAX;i++){
     //Les boules qui vont trop loin sont supprimés
-    if(snake[i].y>6*(longueur-1)){
+    if(snake[i].y>6*(longueur-1)-1){
       snake[i].direction.y=0;
       snake[i].tir=0;
       if(i==0){
@@ -129,7 +132,7 @@ snake[i].nb_tour=0;
     if(i>0){
       for(int t=0;t<snake[i-1].atourner;t++){
 	//Ici on compte le nombre de raffraichissement avant de remettre le vecteur direction en x a 0, si la boule tournais
-	if(snake[i-1].tab_tour[t].compteur>-1 && snake[i-1].tab_tour[t].compteur<9){
+	if(snake[i-1].tab_tour[t].compteur>-1 && snake[i-1].tab_tour[t].compteur<0.5/(vitesse*2)-1){
 	  tourne=0;
 	  snake[i-1].tab_tour[t].compteur++;
 	  test=1;
@@ -160,6 +163,7 @@ snake[i].nb_tour=0;
   }
 
   /***********Mise a jour de la camera pour suivre la pente(experimental)*********/
+/****Abandonné************
   if(pente_actuelle==prochaine_pente){
     float prochain_delta_y=blocs[2][snake[0].block_y+1].hauteur-blocs[2][snake[0].block_y].hauteur;
     float prochain_delta_x= 6;
@@ -178,13 +182,10 @@ snake[i].nb_tour=0;
     else
       incr=vitesse;
   }
- 
+ ***************************/
   if(snake[0].y+0.4>=(snake[0].block_y)*6)
     snake[0].block_y++;
 
-
-
-  printf("%f--%f--%f\n",pente_actuelle,prochaine_pente,incr);
 
   }
   glutPostRedisplay();
@@ -243,7 +244,7 @@ void click(unsigned char touche, int x, int y){
     if(taille-1>0){
       snake[TAILLE_MAX-taille_tir]=snake[0];
       snake[TAILLE_MAX-taille_tir].tir=1;
-      snake[TAILLE_MAX-taille_tir].direction.y+=0.1;
+      snake[TAILLE_MAX-taille_tir].direction.y+=2*vitesse;
       taille_tir++;
       taille--;
     }
@@ -266,10 +267,15 @@ int main(int argc, char *argv[]){
     printf("veuillez entrer ./troisd <longueur> <largeur> <vitesse> \n");
     exit(-1);
   }
+if(atoi(argv[3])==0){
+ printf(" <vitesse> doit etre un entier \n");
+    exit(-1);
+  
+}
   longueur=atoi(argv[1]);
   largeur=atoi(argv[2]);
-  vitesse=atof(argv[3]);
-  
+  vitesse=0.025*atoi(argv[3]);
+  init_decor();
   init_plateau();
   score=0;
   taille=15;
@@ -294,12 +300,7 @@ int main(int argc, char *argv[]){
   glutIdleFunc(Animer);
  
   glutDisplayFunc(Affichage);
-   int angle = 1;
-  while(angle%360 != 0){
-     usleep(90);
-    gluLookAt(4*cos(angle/(2*M_PI)),4*sin(angle/(2*M_PI)),1,0,0,0,0,0,1);
-    angle++;
-  }
+ 
   glutMainLoop();
 
 

@@ -27,17 +27,18 @@ void Affichage(){
   gluPerspective(70,(double)640/480,1,1000);
   
   // ici on anticipe la prochaine pente pour que la camera commence son mouvement
+/****Abandonné************
   if((pente_actuelle<prochaine_pente && pente_actuelle+incr>prochaine_pente) || (pente_actuelle>prochaine_pente && pente_actuelle+incr<prochaine_pente))
     prochaine_pente=pente_actuelle;
   else
     pente_actuelle+=incr;
-
+**********/
   //Experimental
   if(rotation == 1){
     gluLookAt(longueur*4*sin(angle/(20*M_PI)),longueur*4*cos(angle/(20*M_PI)),largeur*2,largeur*2,longueur*2,0,0,0,1);
   }
   else{
-    gluLookAt(snake[0].x,snake[0].y-8+snake[0].compteur_colli/39,snake[0].z+5+pente_actuelle*2,snake[0].x,snake[0].y,1+snake[0].z+pente_actuelle*2,0,0,1);
+    gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4,snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
   }
 
   //On dessine le score et le nombre de boules restantes

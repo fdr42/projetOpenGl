@@ -12,7 +12,7 @@ void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,i
     //On se met au milieu du block et on dessine la boule avec z depends du compteur de rebond
     glTranslatef(pos_largeur+1,pos_longueur+3,delta_y/2+actuel.hauteur+actuel.compteur+.3);
     glColor3ub(255,0,0);
-    gluSphere(boule,.5,30,30);
+    gluSphere(boule,.5,15,15);
     glPopMatrix();	
   }
   glBegin(GL_QUADS);
@@ -108,7 +108,7 @@ void init_plateau(){
     if(j<2)
       base.hauteur=1;
     else
-      base.hauteur=rand()%(4);
+      base.hauteur=1+rand()%(5);
     for(int i=0;i<largeur;i++){
       base.bonus=0;
       blocs[i][j]=base;
@@ -129,13 +129,13 @@ void init_plateau(){
 
 
 
-  }while(compteur<20);
+  }while(compteur<longueur);
   do{
     compteur=0;
     if(rand()%(10)==5){
       int i=2+rand()%(longueur-2);
       for(int j=1;j<largeur-1;j++){
-	blocs[j][i].obstacle=rand()%(6)+1;
+	blocs[j][i].obstacle=rand()%(8)+1;
       }
     }
     for(int i=0;i<largeur;i++)
@@ -144,24 +144,57 @@ void init_plateau(){
 	  compteur++;
 
   }while(compteur<2*(longueur+largeur));
+
+}
+void init_decor(){
+for(int i=0;i<100;i++){
+planete boule;
+boule.x=-250+rand()%500;
+boule.y=rand()%600;
+boule.z=-50+rand()%200;
+
+boule.direction.x=0;
+boule.direction.y=0;
+boule.direction.z=0;
+if(rand()%10>2){
+boule.direction.x=(-10+rand()%20)/10;
+boule.direction.y=(-10+rand()%20)/10;
+boule.direction.z=(-10+rand()%20)/10;
+}
+boule.r=rand()%255;
+boule.g=rand()%255;
+boule.b=rand()%255;
+boule.taille=rand()%10;
+
+boule.anneau=0;
+if(rand()%10>4)
+boule.anneau=1;
+	
+decor[i]=boule;
+
 }
 
 
-void dessinPlannete(int posx, int posy){
+}
+
+void dessinPlannete(){
   GLUquadric* boule =gluNewQuadric();
   int i;
-  glPushMatrix();
-  glTranslatef(20,20,20);
+ 
   for(i = 0; i <100; i++){
-    glTranslatef(20,5*i,-5);
-    glRotatef(30,20,1,100);
-    
-    glColor3ub(rand()*255,rand()*255,rand()*255);
-    gluSphere(boule,5,30,30);
-     glColor3ub(rand()*255,rand()*255,rand()*255);
-     glutSolidTorus(1, 10, 8, 30);
-  }
+ glPushMatrix();
+    glTranslatef(decor[i].x,decor[i].y,decor[i].z);
+    glColor3ub(decor[i].r,decor[i].g,decor[i].b);
+    gluSphere(boule,decor[i].taille,10,20);
+   glColor3ub(decor[i].g,decor[i].b,decor[i].r);
+if(decor[i].anneau==1)
+ glutSolidTorus(1, decor[i].taille+5, 8, 10);
+decor[i].x+=decor[i].direction.x;
+decor[i].y+=decor[i].direction.y;
+decor[i].z+=decor[i].direction.z;
   glPopMatrix();
-  
+   
+  }
+
   
 }

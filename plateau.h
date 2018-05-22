@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include "serpent.h"
 typedef struct block{
+
   int hauteur;
   int bonus;
 float obstacle;
@@ -19,8 +20,21 @@ float rebond;
 }block;
 int longueur;
 int largeur;
+typedef struct planete{
 
-block blocs[100][100];
+    vecteur direction;
+  float x;
+    float y;
+    float z;
+float taille;
+int anneau;
+float r;
+float g;
+float b;
+}planete;
+block blocs[1000][100];
+planete decor[100];
+void init_decor();
 void dessinBlock(block precedent, block suivant, int pos_largeur,int pos_longueur,int bordure);
 void init_plateau();
 void dessinPlannete();
