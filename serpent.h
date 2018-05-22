@@ -22,7 +22,7 @@ typedef struct vecteur{
 typedef struct animation{
 float pos_x;
 float pos_y;
-int compteur;
+float compteur;
 }animation;
 
 typedef struct boule{
@@ -47,6 +47,8 @@ float pente_actuelle;
 float vitesse;
 int tourne;
 int taille;
+
+int rotation;
 int taille_tir;
 void dessine_snake(boule* serpent,int taille);
 boule* init_serpent(boule* serpent);

@@ -156,11 +156,11 @@ boule.z=-50+rand()%200;
 boule.direction.x=0;
 boule.direction.y=0;
 boule.direction.z=0;
-if(rand()%10>2){
-boule.direction.x=(-10+rand()%20)/10;
-boule.direction.y=(-10+rand()%20)/10;
-boule.direction.z=(-10+rand()%20)/10;
-}
+
+boule.direction.x=(-40+rand()%80)/50;
+boule.direction.y=(-40+rand()%80)/50;
+boule.direction.z=(-40+rand()%80)/50;
+
 boule.r=rand()%255;
 boule.g=rand()%255;
 boule.b=rand()%255;
@@ -189,9 +189,11 @@ void dessinPlannete(){
    glColor3ub(decor[i].g,decor[i].b,decor[i].r);
 if(decor[i].anneau==1)
  glutSolidTorus(1, decor[i].taille+5, 8, 10);
+if(!rotation){
 decor[i].x+=decor[i].direction.x;
 decor[i].y+=decor[i].direction.y;
 decor[i].z+=decor[i].direction.z;
+}
   glPopMatrix();
    
   }

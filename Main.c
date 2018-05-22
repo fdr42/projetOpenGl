@@ -6,7 +6,6 @@
 #define nbpix_y 20
 
 int angle = 0;
-int rotation = 1;
 
 
 
@@ -17,9 +16,9 @@ void tourner(int boule){
   if(boule==1){
     if(snake[boule-1].atourner<snake[boule-1].nb_tour){
       if(snake[boule-1].tab_tour[snake[boule-1].atourner].pos_x>0)
-	snake[boule].direction.x+=vitesse*2;
+	snake[boule].direction.x+=0.25;
       else
-	snake[boule].direction.x-=vitesse*2;
+	snake[boule].direction.x-=0.25;
       snake[boule-1].tab_tour[snake[boule-1].atourner].compteur=0;
       snake[boule-1].atourner++;
     }
@@ -27,9 +26,9 @@ void tourner(int boule){
   }else if(snake[boule-1].atourner<=snake[boule-1].nb_tour ){
     if(snake[boule-1].atourner!=0){
       if(snake[boule-1].tab_tour[snake[boule-1].atourner].pos_x>0)
-	snake[boule].direction.x+=vitesse*2;
+	snake[boule].direction.x+=0.25;
       else
-	snake[boule].direction.x-=vitesse*2;
+	snake[boule].direction.x-=0.25;
       snake[boule-1].tab_tour[snake[boule-1].atourner].compteur=0;
     }
     snake[boule-1].atourner++;
@@ -53,7 +52,8 @@ void Animer(){
       snake[k].direction.y=0;
     //on compte jusqua 40 avant de decrementer une boule 
 if(taille!=1){
-    if(++snake[0].compteur_colli>=40){
+snake[0].compteur_colli+=20*vitesse;
+    if(snake[0].compteur_colli>=40){
 
       blocs[snake[0].block_x][snake[0].block_y-1].obstacle--;
       taille--;
@@ -132,7 +132,7 @@ snake[i].nb_tour=0;
     if(i>0){
       for(int t=0;t<snake[i-1].atourner;t++){
 	//Ici on compte le nombre de raffraichissement avant de remettre le vecteur direction en x a 0, si la boule tournais
-	if(snake[i-1].tab_tour[t].compteur>-1 && snake[i-1].tab_tour[t].compteur<0.5/(vitesse*2)-1){
+	if(snake[i-1].tab_tour[t].compteur>-1 && snake[i-1].tab_tour[t].compteur<1){
 	  tourne=0;
 	  snake[i-1].tab_tour[t].compteur++;
 	  test=1;
@@ -278,6 +278,7 @@ if(atoi(argv[3])==0){
   init_decor();
   init_plateau();
   score=0;
+rotation=1;
   taille=15;
   taille_tir=1;
   pente_actuelle=0;
