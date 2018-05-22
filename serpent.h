@@ -11,6 +11,7 @@
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
+#include "util.h"
 
 #define TAILLE_MAX 150
 
@@ -40,16 +41,11 @@ int block_x;
 }boule;
 
 boule snake[TAILLE_MAX+1];
-float incr;
-int score;
-float prochaine_pente;
-float pente_actuelle;
-float vitesse;
-int tourne;
-int taille;
+//float incr;
 
-int rotation;
-int taille_tir;
+//float prochaine_pente;
+//float pente_actuelle;
+
 void dessine_snake(boule* serpent,int taille);
 boule* init_serpent(boule* serpent);
 void point_vue();

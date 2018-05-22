@@ -26,12 +26,48 @@ else
   glPopMatrix();
   //On remet la matrice precedente
 }
+void menu(){
+if(fini==2){
+  drawBitmapText("Vous avez perdu... appuyez sur R pour recommencer",-0.5,0,0,0);
+}else{
+char phrase[100];
+ int x=score;
+  char chiffres[10];
+char retourne[10];
+  int a=0;
+  while (x != 0)
+    {
 
+      chiffres[a] = '0'+x % 10;
+      a++;
+      x /= 10;
+    }
+int y=0;
+for(int z=a;z>0;z--){
+retourne[y]=chiffres[z-1];
+y++;
+}
+
+  retourne[a] = '\0';
+strcpy(phrase, "Bravo! vous avez gagné ");
+strcat(phrase, retourne);
+strcat(phrase, " points!");	
+ drawBitmapText(phrase,-0.7,0,0,0);
+ drawBitmapText(" Vous pouvez recommencer (R) ou continuer(C)",-0.8,-0.2,0,0);
+
+
+ 
+
+}
+
+
+
+}
 void Affichage(){
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
   glLoadIdentity();
   gluPerspective(70,(double)640/480,1,1000);
-  
+  if(!fini){
   // ici on anticipe la prochaine pente pour que la camera commence son mouvement
 /****Abandonné************
   if((pente_actuelle<prochaine_pente && pente_actuelle+incr>prochaine_pente) || (pente_actuelle>prochaine_pente && pente_actuelle+incr<prochaine_pente))
@@ -112,7 +148,8 @@ void Affichage(){
   glVertex3d(0, 0, 0);
   glVertex3d(0, 0,100);
   glEnd();
-
+}else
+menu();
   glFlush();
 }
 

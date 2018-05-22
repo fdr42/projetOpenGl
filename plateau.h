@@ -32,6 +32,8 @@ float r;
 float g;
 float b;
 }planete;
+
+
 block blocs[1000][100];
 planete decor[100];
 void init_decor();

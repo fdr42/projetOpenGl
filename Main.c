@@ -8,7 +8,6 @@
 int angle = 0;
 
 
-
 /*******Fonction qui permet de reproduire le mouvement du snake*******/
 void tourner(int boule){
   /******La fonction vas ajouter une valeur au vecteur direction en fonction du deplacement de la precedente**********/
@@ -50,8 +49,9 @@ void Animer(){
   if(blocs[snake[0].block_x][snake[0].block_y-1].obstacle>0){
     for(int k=0;k<TAILLE_MAX-taille_tir;k++)
       snake[k].direction.y=0;
-    //on compte jusqua 40 avant de decrementer une boule 
-if(taille!=1){
+if(taille==1)
+fini=2;
+	else if(taille!=1){ //on compte jusqua 40 avant de decrementer une boule 
 snake[0].compteur_colli+=20*vitesse;
     if(snake[0].compteur_colli>=40){
 
@@ -65,6 +65,8 @@ snake[0].compteur_colli+=20*vitesse;
       snake[0].compteur_colli=0;
 }
     }
+	
+
 
   }else{
     //Remise a 0 du compteur de collision
@@ -107,6 +109,7 @@ snake[0].compteur_colli+=20*vitesse;
       if(i==0){
 	score+=40*taille;//On ajoute 40 pts par boule
 	taille=0;
+fini=1;
       }
     }
     if(snake[i].tir)
@@ -278,12 +281,15 @@ if(atoi(argv[3])==0){
   init_decor();
   init_plateau();
   score=0;
-rotation=1;
+	rotation=1;
   taille=15;
   taille_tir=1;
+/******Abandonné
   pente_actuelle=0;
   prochaine_pente=0;
   incr=0;
+***/
+fini=0;
   srand(getpid());
   tourne=1;
   init_serpent(snake);
