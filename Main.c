@@ -5,7 +5,7 @@
 #define nbpix_y 20
 #define nbpix_y 20
 
-int angle = 1;
+int angle = 0;
 int rotation = 1;
 
 
@@ -38,10 +38,10 @@ void tourner(int boule){
 }
 
 void Animer(){
-  usleep(10000);
+  usleep(1000);
   if(rotation == 1){
-    angle++;
-    if(angle > 360){
+    angle+=1;
+    if(angle >= 360){
       angle = 0;
     }
   }

@@ -1,5 +1,6 @@
 #include "plateau.h"
 #include <time.h>
+int rotation;
 void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,int bordure){
   // dessin des obstacles
   /********Gestion des bonus******/
@@ -155,9 +156,9 @@ void dessinPlannete(int posx, int posy){
     glTranslatef(20,5*i,-5);
     glRotatef(30,20,1,100);
     
-     glColor3ub(130,130,130);
+    glColor3ub(rand()*255,rand()*255,rand()*255);
     gluSphere(boule,5,30,30);
-     glColor3ub(150,150,150);
+     glColor3ub(rand()*255,rand()*255,rand()*255);
      glutSolidTorus(1, 10, 8, 30);
   }
   glPopMatrix();
