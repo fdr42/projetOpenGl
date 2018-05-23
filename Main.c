@@ -5,7 +5,7 @@
 #define nbpix_y 20
 #define nbpix_y 20
 
-int angle = 0;
+float angle = 0;
 
 
 /*******Fonction qui permet de reproduire le mouvement du snake*******/
@@ -38,7 +38,7 @@ void tourner(int boule){
 void Animer(){
   usleep(1000);
   if(rotation == 1){
-    angle+=1;
+    angle+=0.1;
     if(angle >= 360){
       angle = 0;
     }

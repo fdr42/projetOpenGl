@@ -1,7 +1,7 @@
 #include "affichage.h"
 #include <string.h>
 
-extern int angle;
+extern float angle;
 extern int rotation;
 
 /**********Fonction de dessin de chaines de caracteres***********/
@@ -80,7 +80,7 @@ void Affichage(){
 **********/
   //Experimental
   if(rotation == 1){
-    gluLookAt(longueur*4*sin(angle/(20*M_PI)),longueur*4*cos(angle/(20*M_PI)),largeur*2,largeur*2,longueur*2,0,0,0,1);
+    gluLookAt(40*sin(angle/(2*M_PI))+20,120*cos(angle/(2*M_PI))+60,20,20,20,10,0,0,1);
   drawBitmapText("Appuyez sur P pour lancer!",-0.4,-0.8,0,0);
   }
   else{
