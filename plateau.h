@@ -10,6 +10,7 @@
 #include <math.h>
 #include <unistd.h>
 #include "serpent.h"
+
 typedef struct block{
   int hauteur;
   int bonus;
@@ -17,8 +18,10 @@ typedef struct block{
   float compteur;
   float rebond;
 }block;
+
 int longueur;
 int largeur;
+
 typedef struct planete{
   vecteur direction;
   float x;
@@ -34,6 +37,7 @@ typedef struct planete{
 
 block blocs[1000][100];
 planete decor[100];
+
 void init_decor();
 void dessinBlock(block precedent, block suivant, int pos_largeur,int pos_longueur,int bordure);
 void init_plateau();

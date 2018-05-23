@@ -16,35 +16,32 @@
 #define TAILLE_MAX 150
 
 typedef struct vecteur{
-    float x;
-    float y;
-    float z;
+  float x;
+  float y;
+  float z;
 }vecteur;
+
 typedef struct animation{
-float pos_x;
-float pos_y;
-float compteur;
+  float pos_x;
+  float pos_y;
+  float compteur;
 }animation;
 
 typedef struct boule{
-    vecteur direction;
-int tir;
-    float x;
-    float y;
-    float z;
-    int block_y;
-int compteur_colli;
-int block_x;
-    int nb_tour;
-    animation tab_tour[3000];
-    int atourner;
+  vecteur direction;
+  int tir;
+  float x;
+  float y;
+  float z;
+  int block_y;
+  int compteur_colli;
+  int block_x;
+  int nb_tour;
+  animation tab_tour[3000];
+  int atourner;
 }boule;
 
 boule snake[TAILLE_MAX+1];
-//float incr;
-
-//float prochaine_pente;
-//float pente_actuelle;
 
 void dessine_snake(boule* serpent,int taille);
 boule* init_serpent(boule* serpent);
