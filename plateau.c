@@ -57,32 +57,35 @@ void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,i
   glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
   
   glEnd();
+
+  
   
   glBegin(GL_QUADS);
 
 
-  glColor3ub(30,30,30); //face rouge
+  glColor3ub(30,30,30);
 
-  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
+  glVertex3d(2+pos_largeur,8+pos_longueur,0);
 
-  glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
+  glVertex3d(2+pos_largeur,0+pos_longueur,0);
 
-  glVertex3d(0+pos_largeur,8+pos_longueur,0+bordure);
+  glVertex3d(0+pos_largeur,0+pos_longueur,0);
 
-  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-
+  glVertex3d(0+pos_largeur,8+pos_longueur,0);
 
 
   glVertex3d(2+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
 
-  glVertex3d(2+pos_largeur,0+pos_longueur,0);
-
-  glVertex3d(2+pos_largeur,8+pos_longueur,0);
-
   glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
 
+  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
+
+  glVertex3d(0+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
+        
+
   
-  glColor3ub(50,50,50); //face rouge
+  glColor3ub(50,50,50); 
+  
   glVertex3d(0+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
 
   glVertex3d(0+pos_largeur,0+pos_longueur,0);
@@ -91,8 +94,13 @@ void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,i
 
   glVertex3d(2+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
 
-glColor3ub(30,30,30); //face rouge
+  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
 
+  glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
+
+  glVertex3d(0+pos_largeur,8+pos_longueur,0+bordure);
+
+  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
  
   glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
 
@@ -102,16 +110,19 @@ glColor3ub(30,30,30); //face rouge
 
   glVertex3d(0+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
 
-
   
-  glVertex3d(2+pos_largeur,8+pos_longueur,0);
+
+   glVertex3d(2+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
 
   glVertex3d(2+pos_largeur,0+pos_longueur,0);
 
-  glVertex3d(0+pos_largeur,0+pos_longueur,0);
+  glVertex3d(2+pos_largeur,8+pos_longueur,0);
 
-  glVertex3d(0+pos_largeur,8+pos_longueur,0);
-        
+  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
+
+
+  
+  
 
   /*if(((pos_largeur/2)%2==1) && (pos_longueur/8)%2==1)
     glColor3ub(100,100,100); //face blanche
@@ -123,13 +134,7 @@ glColor3ub(30,30,30); //face rouge
   glColor3ub(255,255,255);*/
                
 
-  glVertex3d(2+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
-
-  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-
-  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-
-  glVertex3d(0+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
+  
 
 
   glEnd();
