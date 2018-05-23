@@ -1,4 +1,4 @@
-Projet inspiré par snake en c avec opengl
+Projet inspiré par le jeu Snake en C avec OpenGL
 =========================
 
 Comment compiler le projet ?
