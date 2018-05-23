@@ -157,11 +157,11 @@ boule.z=-50+rand()%200;
 boule.direction.x=0;
 boule.direction.y=0;
 boule.direction.z=0;
-
-boule.direction.x=(-40+rand()%80)/50;
-boule.direction.y=(-40+rand()%80)/50;
-boule.direction.z=(-40+rand()%80)/50;
-
+if(rand()%10>5){
+boule.direction.x=(float)(-10+rand()%20)/160;
+boule.direction.y=(float)(-10+rand()%20)/160;
+boule.direction.z=(float)(-10+rand()%20)/160;
+ }
 boule.r=rand()%255;
 boule.g=rand()%255;
 boule.b=rand()%255;
