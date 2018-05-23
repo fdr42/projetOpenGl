@@ -5,3 +5,4 @@ int score;
 int rotation;
 int taille_tir;
 int fini;
+int niveau;

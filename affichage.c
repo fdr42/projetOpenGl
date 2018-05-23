@@ -11,6 +11,8 @@ void drawBitmapText(char *string,float x,float y,float z,int sens) {
   glOrtho(0, 800, 600, 0, -1, 1);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  glColor3ub(255,150,0); 
   glRasterPos3f(x, y,z);
   //on dessine chaque caractere
 if(sens)
@@ -49,13 +51,14 @@ y++;
 }
 
   retourne[a] = '\0';
-strcpy(phrase, "Bravo! vous avez gagné ");
+strcpy(phrase, "Bravo! vous avez gagne ");
 strcat(phrase, retourne);
 strcat(phrase, " points!");	
  drawBitmapText(phrase,-0.7,0,0,0);
+if(niveau !=-1)
  drawBitmapText(" Vous pouvez recommencer (R) ou continuer(C)",-0.8,-0.2,0,0);
-
-
+else
+drawBitmapText(" Vous pouvez recommencer (R)",-0.8,-0.2,0,0);
  
 
 }
@@ -97,6 +100,33 @@ void Affichage(){
     }
   chiffres[a] = '\0';
   drawBitmapText(chiffres,0.8,0.8,0,1);
+
+ x=niveau+1;
+   a=0;
+char phrase[25];
+char retourne[4];
+strcpy(phrase, "Vous etes au niveau ");
+if(niveau !=-1){
+  while (x != 0)
+    {
+
+      chiffres[a] = '0'+x % 10;
+      a++;
+      x /= 10;
+    }
+  chiffres[a] = '\0';
+int y=0;
+for(int z=a;z>0;z--){
+retourne[y]=chiffres[z-1];
+y++;
+}
+
+  retourne[a] = '\0';
+strcat(phrase, retourne);
+}else{
+strcat(phrase, "personnalise");
+}
+  drawBitmapText(phrase,-0.3,0.8,0,0);
 
   a=0;
   x=score; 

@@ -118,32 +118,33 @@ void init_plateau(){
   do{
     compteur=0;
     if(rand()%(8)==3)
-      blocs[1+rand()%(largeur-2)][rand()%(longueur)].bonus=1;
+      blocs[1+rand()%(largeur-2)][rand()%(longueur-1)].bonus=1;
     for(int i=0;i<largeur;i++)
       for(int j=0;j<longueur;j++){
 	if(blocs[i][j].bonus)	
 	  compteur++;
 	blocs[i][j].obstacle=0;
       }
-		
 
+  }while(compteur<longueur+niveau);
 
-
-  }while(compteur<longueur);
   do{
     compteur=0;
     if(rand()%(10)==5){
       int i=2+rand()%(longueur-2);
+if((blocs[2][i-1].obstacle==0 && blocs[2][i-2].obstacle==0 )|| blocs[2][i-2].obstacle==0){
       for(int j=1;j<largeur-1;j++){
-	blocs[j][i].obstacle=rand()%(8)+1;
+
+	blocs[j][i].obstacle=rand()%(7)+1;
       }
     }
+}
     for(int i=0;i<largeur;i++)
       for(int j=0;j<longueur;j++)
 	if(blocs[i][j].obstacle>0)	
 	  compteur++;
 
-  }while(compteur<2*(longueur+largeur));
+  }while(compteur<2*(longueur+largeur-10+niveau));
 
 }
 void init_decor(){

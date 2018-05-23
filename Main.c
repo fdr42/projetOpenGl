@@ -79,7 +79,7 @@ snake[0].compteur_colli+=20*vitesse;
 
   /******Gestion des bonus************/
   //Cette condition cherche a savoir si le serpent percute une boule bonus
-  if(blocs[snake[0].block_x][snake[0].block_y-1].bonus && snake[0].y-((snake[0].block_y-1)*6)>2.3 && snake[0].y-((snake[0].block_y-1)*6)<3){
+  if(blocs[snake[0].block_x][snake[0].block_y-1].bonus && snake[0].y-((snake[0].block_y-1)*6)>2.3 && snake[0].y-((snake[0].block_y-1)*6)<3.2){
     taille++;
     score+=20;
     blocs[snake[0].block_x][snake[0].block_y-1].bonus=0;
@@ -258,6 +258,36 @@ void click(unsigned char touche, int x, int y){
      if(touche == 'p'){
       rotation = 0;
     }
+    if(touche == 'r'&& fini!=0){
+       init_decor();
+  init_plateau();
+  score=0;
+	rotation=1;
+  taille=15;
+  taille_tir=1;
+fini=0;
+  srand(getpid());
+  tourne=1;
+  init_serpent(snake);
+    }
+  if(touche == 'c'&& fini!=0 && niveau !=-1){
+niveau++;
+if(niveau%2==1)
+	longueur+=5;
+largeur=7+rand()%4;
+if(niveau%2==0)
+  vitesse+=0.015;
+       init_decor();
+ taille=15+niveau;
+  srand(getpid());
+  init_plateau();
+  score=0;
+	rotation=1;
+  taille_tir=1;
+fini=0;
+  tourne=1;
+  init_serpent(snake);
+    }
 
   
       
@@ -266,23 +296,28 @@ void click(unsigned char touche, int x, int y){
 
 
 int main(int argc, char *argv[]){
-  if(argc!=4){
-    printf("veuillez entrer ./troisd <longueur> <largeur> <vitesse> \n");
+  if(argc!=4 && argc!=1){
+    printf("veuillez entrer ./troisd <longueur> <largeur> <vitesse> pour une partie personnalisée\n N'entrez aucun argument pour lancer les niveaux\n");
     exit(-1);
-  }
-if(atoi(argv[3])==0){
- printf(" <vitesse> doit etre un entier \n");
-    exit(-1);
-  
-}
-  longueur=atoi(argv[1]);
+  }else if(argc==4){
+ longueur=atoi(argv[1]);
   largeur=atoi(argv[2]);
   vitesse=0.025*atoi(argv[3]);
+niveau=-1;
+}else if(argc==1){
+
+ longueur=10;
+  largeur=10;
+  vitesse=0.025*2;
+
+}
+
+   taille=15;
   init_decor();
   init_plateau();
   score=0;
 	rotation=1;
-  taille=15;
+
   taille_tir=1;
 /******Abandonné
   pente_actuelle=0;
