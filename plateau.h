@@ -11,26 +11,24 @@
 #include <unistd.h>
 #include "serpent.h"
 typedef struct block{
-
   int hauteur;
   int bonus;
-float obstacle;
-float compteur;
-float rebond;
+  float obstacle;
+  float compteur;
+  float rebond;
 }block;
 int longueur;
 int largeur;
 typedef struct planete{
-
-    vecteur direction;
+  vecteur direction;
   float x;
-    float y;
-    float z;
-float taille;
-int anneau;
-float r;
-float g;
-float b;
+  float y;
+  float z;
+  float taille;
+  int anneau;
+  float r;
+  float g;
+  float b;
 }planete;
 
 

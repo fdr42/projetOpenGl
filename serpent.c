@@ -1,4 +1,4 @@
-#include "serpent.h"
+#include "plateau.h"
 void dessine_snake(boule* serpent,int taille){
   GLUquadric* boule =gluNewQuadric();
 
@@ -6,41 +6,41 @@ void dessine_snake(boule* serpent,int taille){
     glPushMatrix();
    	 	
     glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
-    glColor3ub(255,255-(6*snake[0].compteur_colli),255-(6*snake[0].compteur_colli));
+    glColor3ub(decor[i].r,decor[i].g,decor[i].b);
     if(i==0){
       gluSphere(boule,.5,30,30);
       
     }else
       gluSphere(boule,.4,30,30);
-glPopMatrix();
+    glPopMatrix();
   }
- for(int i=0;i<TAILLE_MAX;i++){
- glPushMatrix();
-if(snake[i].tir==1){
+  for(int i=0;i<TAILLE_MAX;i++){
+    glPushMatrix();
+    if(snake[i].tir==1){
  
-    glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
-    glColor3ub(0,255,255);
+      glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
+      glColor3ub(rand()%255,rand()%255,rand()%255);
       gluSphere(boule,.4,30,30);
-}
-glPopMatrix();
+    }
+    glPopMatrix();
   }
-glPopMatrix();
+  glPopMatrix();
 
 }
 
 boule* init_serpent(boule* serpent){
   float y=5;
   for(int i=0;i<TAILLE_MAX;i++){
-      serpent[i].atourner=0;
-serpent[i].tir=0;
+    serpent[i].atourner=0;
+    serpent[i].tir=0;
     serpent[i].x=10.25;
     serpent[i].y=y;
     serpent[i].z=1.5;
     for(int j=0;j<TAILLE_MAX;j++){
-        serpent[i].tab_tour[j].pos_y=0;
-        serpent[i].tab_tour[j].pos_x=0;
-        serpent[i].tab_tour[j].compteur=-1;
-        serpent[i].nb_tour=0;
+      serpent[i].tab_tour[j].pos_y=0;
+      serpent[i].tab_tour[j].pos_x=0;
+      serpent[i].tab_tour[j].compteur=-1;
+      serpent[i].nb_tour=0;
     }
     y-=.5;
     if(i==0)
