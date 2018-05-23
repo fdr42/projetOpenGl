@@ -6,10 +6,10 @@ void dessine_snake(boule* serpent,int taille){
     glPushMatrix();
    	 	
     glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
-    glColor3ub(decor[i].r,decor[i].g,decor[i].b);
+    glColor3ub(decor[i].r+(serpent[0].compteur_colli*3),decor[i].g-(serpent[0].compteur_colli*3),decor[i].b-(serpent[0].compteur_colli*3));
     if(i==0){
       gluSphere(boule,.5,30,30);
-      
+      glPopMatrix();
     }else
       gluSphere(boule,.4,30,30);
     glPopMatrix();

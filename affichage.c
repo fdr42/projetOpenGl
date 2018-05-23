@@ -84,8 +84,11 @@ void Affichage(){
   drawBitmapText("Appuyez sur P pour lancer!",-0.4,-0.8,0,0);
   }
   else{
-int obs=blocs[(int)snake[0].x/2][(int)(snake[0].y-8)/8].obstacle;
-    gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4+(obs/2),snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
+int obs=0;
+if(blocs[(int)snake[0].x/2][(int)(snake[0].y-8)/8].obstacle!=0)
+obs=1;
+
+    gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4+obs,snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
   }
 
   //On dessine le score et le nombre de boules restantes

@@ -19,18 +19,7 @@ void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,i
   glLineWidth(3.5);
   glBegin(GL_LINES);
   glColor3ub(255,255,255);
-  //Avant droit.
-  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-  glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
-  //Avant gauche
-  glVertex3d(0+pos_largeur,8+pos_longueur,0+bordure);
-  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-  //Avant haut
-  glVertex3d(0+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-  glVertex3d(2+pos_largeur,8+pos_longueur,suivant.hauteur+bordure+actuel.obstacle/3);
-  //Avant bas
-  glVertex3d(0+pos_largeur,8+pos_longueur,0+bordure);
-  glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
+
   //Ariere droit
   glVertex3d(2+pos_largeur,0+pos_longueur,actuel.hauteur+bordure+actuel.obstacle/3);
   glVertex3d(2+pos_largeur,0+pos_longueur,0+bordure);
@@ -55,6 +44,13 @@ void dessinBlock(block actuel, block suivant, int pos_largeur,int pos_longueur,i
   //Droite bas
   glVertex3d(2+pos_largeur,0+pos_longueur,0+bordure);
   glVertex3d(2+pos_largeur,8+pos_longueur,0+bordure);
+  //croix
+if(actuel.obstacle!=0){
+ glVertex3d(pos_largeur,pos_longueur,actuel.hauteur+actuel.obstacle/3);
+ glVertex3d(2+pos_largeur,pos_longueur,actuel.hauteur);
+ glVertex3d(2+pos_largeur,pos_longueur,actuel.hauteur+actuel.obstacle/3);
+ glVertex3d(pos_largeur,pos_longueur,actuel.hauteur);
+}
   
   glEnd();
 
