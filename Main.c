@@ -79,7 +79,7 @@ snake[0].compteur_colli+=20*vitesse;
 
   /******Gestion des bonus************/
   //Cette condition cherche a savoir si le serpent percute une boule bonus
-  if(blocs[snake[0].block_x][snake[0].block_y-1].bonus && snake[0].y-((snake[0].block_y-1)*6)>2.3 && snake[0].y-((snake[0].block_y-1)*6)<3.2){
+  if(blocs[snake[0].block_x][snake[0].block_y-1].bonus && snake[0].y-((snake[0].block_y-1)*8)>2.3 && snake[0].y-((snake[0].block_y-1)*8)<3.2){
     taille++;
     score+=20;
     blocs[snake[0].block_x][snake[0].block_y-1].bonus=0;
@@ -103,7 +103,7 @@ snake[0].compteur_colli+=20*vitesse;
   float delta_x;
   for(int i=0;i<TAILLE_MAX;i++){
     //Les boules qui vont trop loin sont supprimés
-    if(snake[i].y>6*(longueur-1)-1){
+    if(snake[i].y>8*(longueur-1)-1){
       snake[i].direction.y=0;
       snake[i].tir=0;
       if(i==0){
@@ -152,14 +152,14 @@ snake[i].nb_tour=0;
     if(i>0 && i<TAILLE_MAX-taille_tir)
       if(tourne && snake[i-1].tab_tour[snake[i-1].atourner].pos_y-.5<=snake[i].y)
 	tourner(i);
-    if(i!=0 && snake[i].y+0.4>=(snake[i].block_y)*6)
+    if(i!=0 && snake[i].y+0.4>=(snake[i].block_y)*8)
       snake[i].block_y++;
 
     /********Gestion de la pente*********/
 
     snake[i].block_x=snake[i].x/2;
     delta_y=blocs[2][snake[i].block_y].hauteur-blocs[2][snake[i].block_y-1].hauteur;
-    delta_x= 6;
+    delta_x= 8;
     pente=delta_y/delta_x;
     snake[i].z+=pente*snake[i].direction.y;
       
@@ -169,24 +169,24 @@ snake[i].nb_tour=0;
 /****Abandonné************
   if(pente_actuelle==prochaine_pente){
     float prochain_delta_y=blocs[2][snake[0].block_y+1].hauteur-blocs[2][snake[0].block_y].hauteur;
-    float prochain_delta_x= 6;
+    float prochain_delta_x= 8;
 
     prochaine_pente=prochain_delta_y/prochain_delta_x;
     float del_y=blocs[2][snake[0].block_y].hauteur-blocs[2][snake[0].block_y-1].hauteur;
-    float del_x= 6;
+    float del_x= 8;
     pente_actuelle = del_y/del_x;
     incr=0;
   }
 
   //Si ça descend on augmente la hauteur de la camera sinon inverse
-  if(snake[0].y>=(snake[0].block_y)*6-sqrt((pow(pente_actuelle-prochaine_pente,2))/vitesse)/4){
+  if(snake[0].y>=(snake[0].block_y)*8-sqrt((pow(pente_actuelle-prochaine_pente,2))/vitesse)/4){
     if(pente_actuelle>prochaine_pente)
       incr=-vitesse;
     else
       incr=vitesse;
   }
  ***************************/
-  if(snake[0].y+0.4>=(snake[0].block_y)*6)
+  if(snake[0].y+0.4>=(snake[0].block_y)*8)
     snake[0].block_y++;
 
 
@@ -201,7 +201,8 @@ void click(unsigned char touche, int x, int y){
 
   //d permet de ourner a droite
   if(touche=='d'){
-    if(snake[0].x+0.5<=largeur*2-2.2 && (blocs[(int)((snake[0].x+0.5)/2)][snake[0].block_y-1].obstacle==0 || snake[0].direction.y==0)){
+    if(snake[0].x+0.5<=largeur*2-2.2 && (blocs[(int)((snake[0].x+0.5)/2)][snake[0].block_y-1].obstacle==0
+			       || (snake[0].direction.y==0 && blocs[(int)((snake[0].x+0.5)/2)][snake[0].block_y-2].obstacle==0))){
       int nb_tour;	  
       for(int i=0;i<TAILLE_MAX;i++){
 	if(i==0)
@@ -220,7 +221,7 @@ void click(unsigned char touche, int x, int y){
   if(touche=='q'){
          
     if(snake[0].x-0.5>=2.5 && (blocs[(int)((snake[0].x-0.5)/2)][snake[0].block_y-1].obstacle==0
-			       || snake[0].direction.y==0)){
+			       || (snake[0].direction.y==0 && blocs[(int)((snake[0].x-0.5)/2)][snake[0].block_y-2].obstacle==0))) {
       int nb_tour;	  
       for(int i=0;i<TAILLE_MAX;i++){
 	if(i==0)

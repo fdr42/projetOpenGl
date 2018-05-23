@@ -84,7 +84,8 @@ void Affichage(){
   drawBitmapText("Appuyez sur P pour lancer!",-0.4,-0.8,0,0);
   }
   else{
-    gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4,snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
+int obs=blocs[(int)snake[0].x/2][(int)(snake[0].y-8)/8].obstacle;
+    gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4+(obs/2),snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
   }
 
   //On dessine le score et le nombre de boules restantes
@@ -141,14 +142,14 @@ strcat(phrase, "personnalise");
  
   /************dessin des blocs**********/
   for(int j=0;j<longueur-1;j++)
-    dessinBlock(blocs[0][j],blocs[0][j+1],0,j*6,1);
+    dessinBlock(blocs[0][j],blocs[0][j+1],0,j*8,1);
     
   for(int j=0;j<longueur-1;j++)
     for(int i=1;i<largeur-1;i++)
-      dessinBlock(blocs[i][j],blocs[i][j+1],i*2,j*6,0);
+      dessinBlock(blocs[i][j],blocs[i][j+1],i*2,j*8,0);
     
   for(int j=0;j<longueur-1;j++)
-    dessinBlock(blocs[largeur-1][j],blocs[largeur-1][j+1],2*(largeur-1),j*6,1);
+    dessinBlock(blocs[largeur-1][j],blocs[largeur-1][j+1],2*(largeur-1),j*8,1);
 
   /************ fin dessin des blocs**********/
   /************dessin du serpent**********/
