@@ -154,8 +154,25 @@ void Animer(){
       snake[i].z+=pente*snake[i].direction.y;
       
     }
+  if(pente_actuelle==prochaine_pente){
+    float prochain_delta_y=blocs[2][snake[2].block_y+1].hauteur-blocs[2][snake[2].block_y].hauteur;
+    float prochain_delta_x= 8;
 
-    if(snake[0].y+0.4>=(snake[0].block_y)*8)
+    prochaine_pente=prochain_delta_y/prochain_delta_x;
+    float del_y=blocs[2][snake[2].block_y].hauteur-blocs[2][snake[2].block_y-1].hauteur;
+    float del_x= 8;
+    pente_actuelle = del_y/del_x;
+    incr=0;
+
+  }
+  //Si ça descend on augmente la hauteur de la camera sinon inverse
+  if(snake[2].y+0.5>=(snake[2].block_y)*8 ){
+    if(pente_actuelle>prochaine_pente)
+      incr=-vitesse/2;
+    else
+      incr=vitesse/2;
+}
+    if(snake[0].y+0.6>=(snake[0].block_y)*8)
       snake[0].block_y++;
   }
   glutPostRedisplay();
@@ -169,6 +186,7 @@ void click(unsigned char touche, int x, int y){
   int nb_tour;
   int i;
   //"d" ou "D" permet de tourner a droite
+if(!rotation){
   if(touche=='d' || touche=='D'){
     if(snake[0].x+0.5<=largeur*2-2.2 && (blocs[(int)((snake[0].x+0.5)/2)][snake[0].block_y-1].obstacle==0
 					 || (snake[0].direction.y==0 && blocs[(int)((snake[0].x+0.5)/2)][snake[0].block_y-2].obstacle==0))){
@@ -207,8 +225,8 @@ void click(unsigned char touche, int x, int y){
     }  
   }
   
-  //"a" ou "A" permet de tirer
-  if(touche=='a' || touche=='A'){
+  //"z" ou "Z" permet de tirer
+  if(touche=='z' || touche=='A'){
     //la derniere boule du serpent est alors projetee
     if(taille-1>0){
       snake[TAILLE_MAX-taille_tir]=snake[0];
@@ -219,13 +237,12 @@ void click(unsigned char touche, int x, int y){
     }   
   }
 
-  //"p" ou "P" permet de lancer la partie
-  if(touche == 'p' ||  touche=='P'){
-    rotation = 0;
-  }
+
 
   //"r" ou "R" permet de recomencer la partie quand elle est finie
   if((touche == 'r' ||  touche=='R') && fini!=0){
+  pente_actuelle=-2;
+  incr=vitesse;
     init_decor();
     init_plateau();
     score=0;
@@ -241,6 +258,8 @@ void click(unsigned char touche, int x, int y){
   //"c" ou "C" permet de passer au niveau suivant si la partie est finie
   if((touche == 'c' ||  touche=='C') && fini!=0 && niveau !=-1){
     niveau++;
+  pente_actuelle=-2;
+  incr=vitesse;
     if(niveau%2==1){
       longueur+=5;
     }
@@ -258,27 +277,39 @@ void click(unsigned char touche, int x, int y){
     fini=0;
     tourne=1;
     init_serpent(snake);
-  }      
+  }     
+} 
+  //"p" ou "P" permet de lancer la partie
+  if(touche == 'p' ||  touche=='P'){
+    rotation = 0;
+  }
   Affichage();
 }
 
 
 int main(int argc, char *argv[]){
-  if(argc!=4 && argc!=1){
-    printf("veuillez entrer ./troisd <longueur> <largeur> <vitesse> pour une partie personnalisée\n N'entrez aucun argument pour lancer les niveaux\n");
+  if(argc!=5 && argc!=1){
+    printf("veuillez entrer ./troisd <longueur> <largeur> <vitesse> <taille> pour une partie personnalisée\n N'entrez aucun argument pour lancer les niveaux\n");
     exit(-1);
-  }else if(argc==4){
+  }else if(argc==5){
+
+if(atoi(argv[1])>1000 || atoi(argv[2])>100 || atoi(argv[4])>300){
+ printf("Les dimensions sont trop grandes\nlongueur max=1000\nlargeur max=100\n taille max=300\n");
+    exit(-1);
+}
+
     longueur=atoi(argv[1]);
     largeur=atoi(argv[2]);
     vitesse=0.025*atoi(argv[3]);
     niveau=-1;
+taille=atoi(argv[4]);
   }else if(argc==1){
     longueur=10;
     largeur=10;
-    vitesse=0.025*2;
+    vitesse=0.05;
+  taille=12;
   }
   
-  taille=15;
   init_decor();
   init_plateau();
   score=0;
@@ -287,6 +318,9 @@ int main(int argc, char *argv[]){
   fini=0;
   srand(getpid());
   tourne=1;
+  pente_actuelle=-2;
+  prochaine_pente=0;
+  incr=vitesse;
   init_serpent(snake);
   glutInit(&argc,argv);
   

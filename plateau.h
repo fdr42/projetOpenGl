@@ -35,7 +35,7 @@ typedef struct planete{
 }planete;
 
 
-block blocs[1000][100];
+block blocs[1000][1000];
 planete decor[100];
 
 void init_decor();

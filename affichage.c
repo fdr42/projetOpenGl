@@ -85,9 +85,13 @@ void Affichage(){
     }
     else{
       int obs=0;
+if((pente_actuelle<=prochaine_pente && pente_actuelle+incr>=prochaine_pente) || (pente_actuelle>=prochaine_pente && pente_actuelle+incr<=prochaine_pente))
+    prochaine_pente=pente_actuelle;
+  else
+	pente_actuelle+=incr;
       if(blocs[(int)snake[0].x/2][(int)(snake[0].y-8)/8].obstacle!=0)
 	obs=1;
-      gluLookAt(snake[0].x,snake[0].y-8,snake[0].z+4+obs,snake[0].x,snake[0].y,3+snake[0].z,0,0,1);
+       gluLookAt(snake[1].x,snake[0].y-8,snake[0].z+4+obs-pente_actuelle*3,snake[1].x,snake[0].y,3+snake[0].z,0,0,1);
     }
     //On dessine le score et le nombre de boules restantes
    
@@ -130,19 +134,25 @@ void Affichage(){
     chiffres[a] = '\0';
     drawBitmapText(chiffres,-0.8,0.8,0,1);
  
+//Optimisation
     /***** Dessin des blocs *****/
-    for(int j=0;j<longueur-1;j++)
+int visible=snake[0].y/8+15;
+if(visible>longueur || rotation==1)
+	visible=longueur;
+if(rotation==1 && visible>150)
+	visible=150;
+    for(int j=0;j<visible-1;j++)
       dessinBlock(blocs[0][j],blocs[0][j+1],0,j*8,1);
     
-    for(int j=0;j<longueur-1;j++)
+    for(int j=0;j<visible-1;j++)
       for(int i=1;i<largeur-1;i++)
 	dessinBlock(blocs[i][j],blocs[i][j+1],i*2,j*8,0);
     
-    for(int j=0;j<longueur-1;j++)
+    for(int j=0;j<visible-1;j++)
       dessinBlock(blocs[largeur-1][j],blocs[largeur-1][j+1],2*(largeur-1),j*8,1);
 
     /***** Dessin du serpent *****/
-    dessine_snake(snake,taille);
+    dessine_snake(snake);
     
     /***** Dessin de planete *****/
     dessinPlannete();

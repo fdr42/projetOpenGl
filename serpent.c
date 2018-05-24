@@ -1,8 +1,15 @@
 #include "plateau.h"
-void dessine_snake(boule* serpent,int taille){
+void dessine_snake(boule* serpent){
   GLUquadric* boule =gluNewQuadric();
+//Inutile de tout afficher en jeu (optimsation)
+int visible=20;
+if(rotation || taille<20)
+	visible=taille;
 
-  for(int i=0;i<taille;i++){
+if(rotation || taille>70)
+	visible=70;
+
+  for(int i=0;i<visible;i++){
     glPushMatrix();   	 	
     glTranslatef(serpent[i].x,serpent[i].y,serpent[i].z);
     glColor3ub(decor[i].r+(serpent[0].compteur_colli*3),decor[i].g-(serpent[0].compteur_colli*3),decor[i].b-(serpent[0].compteur_colli*3));

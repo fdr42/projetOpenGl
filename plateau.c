@@ -122,7 +122,7 @@ void init_plateau(){
   do{
     compteur=0;
     if(rand()%(8)==3)
-      blocs[1+rand()%(largeur-2)][rand()%(longueur-1)].bonus=1;
+      blocs[1+rand()%(largeur-2)][1+rand()%(longueur-1)].bonus=1;
     for(i=0;i<largeur;i++)
       for(j=0;j<longueur;j++){
 	if(blocs[i][j].bonus)	
@@ -145,7 +145,7 @@ void init_plateau(){
       for(j=0;j<longueur;j++)
 	if(blocs[i][j].obstacle>0)	
 	  compteur++;
-  }while(compteur<2*(longueur+largeur-10+niveau));
+  }while(compteur<2*(longueur+largeur-10+niveau*2));
 }
 
 

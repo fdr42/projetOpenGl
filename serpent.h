@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "util.h"
 
-#define TAILLE_MAX 150
+#define TAILLE_MAX 300
 
 typedef struct vecteur{
   float x;
@@ -43,6 +43,6 @@ typedef struct boule{
 
 boule snake[TAILLE_MAX+1];
 
-void dessine_snake(boule* serpent,int taille);
+void dessine_snake(boule* serpent);
 boule* init_serpent(boule* serpent);
 void point_vue();
